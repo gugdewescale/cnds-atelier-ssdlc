@@ -1,10 +1,6 @@
 name: build
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-  pull_request:
 jobs:
   build:
     name: Build
@@ -15,8 +11,8 @@ jobs:
 
     - name: Generate tarball from image
       run: |
-        docker pull nginx:latest
-        docker save -o vuln-image.tar nginx:latest
+        docker build -f Dockerfile -t custom/mvn:1.0
+        docker save -o vuln-image.tar custom/mvn:1.0
 
     - name: Run Trivy vulnerability scanner in tarball mode
       uses: aquasecurity/trivy-action@master
