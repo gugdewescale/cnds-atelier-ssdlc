@@ -11,7 +11,7 @@ jobs:
 
     - name: Generate tarball from image
       run: |
-        docker build -f Dockerfile -t custom/mvn:1.0
+        docker build . -t custom/mvn:1.0
         docker save -o vuln-image.tar custom/mvn:1.0
 
     - name: Run Trivy vulnerability scanner in tarball mode
